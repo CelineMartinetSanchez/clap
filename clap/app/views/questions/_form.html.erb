@@ -1,0 +1,54 @@
+<%= form_for(@question) do |f| %>
+  <% if @question.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@question.errors.count, "error") %> prohibited this question from being saved:</h2>
+
+      <ul>
+      <% @question.errors.full_messages.each do |msg| %>
+        <li><%= msg %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="field">
+    <%= f.label :name %><br>
+    <%= f.text_area :name %>
+  </div>
+  <div class="field">
+    <%= f.label :help %><br>
+    <%= f.text_area :help %>
+  </div>
+
+
+  <h3>Section</h3>
+  <div class="field">
+    <%= f.fields_for :section, @section do |c| %>
+      <%= c.label :name %>
+      <%= c.text_area :name %>
+      <%= c.label :description %>
+      <%= c.text_area :description %>
+    <% end %>
+  </div>
+
+
+  <h3>Answers</h3>
+  <div class="field">
+    <%= f.fields_for :answer, @answer do |a| %>
+      <%= a.label :truefalse, "true" %>
+      <%= a.radio_button :truefalse, "0"%>
+      <%= a.label :truefalse, "false" %>
+      <%= a.radio_button :truefalse, "1" %>
+      <%= a.label :single %>
+      <%= a.text_area :single %>
+      <%= a.label :number %>
+      <%= a.number_field :number %>
+      <%= a.label :multiplechoice %>
+      <%= a.text_area :multiplechoice, include_blank: 'separate with commas' %>
+    <% end %>
+  </div>
+
+  <div class="actions">
+    <%= f.submit %>
+  </div>
+<% end %>

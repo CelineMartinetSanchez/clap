@@ -1,0 +1,13 @@
+# Read about fixtures at http://api.rubyonrails.org/classes/ActiveRecord/FixtureSet.html
+
+one:
+  truefalse: false
+  single: MyString
+  number: 1
+  multiplechoice: MyText
+
+two:
+  truefalse: false
+  single: MyString
+  number: 1
+  multiplechoice: MyText
