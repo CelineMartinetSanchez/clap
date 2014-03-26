@@ -11,7 +11,7 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema.define(version: 20140325235905) do
+ActiveRecord::Schema.define(version: 20140326010329) do
 
   create_table "admins", force: true do |t|
     t.string   "email",                  default: "", null: false
@@ -32,10 +32,9 @@ ActiveRecord::Schema.define(version: 20140325235905) do
   add_index "admins", ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
 
   create_table "answers", force: true do |t|
-    t.boolean  "truefalse"
-    t.string   "single"
-    t.integer  "number"
-    t.text     "multiplechoice"
+    t.text     "goodanswer"
+    t.text     "answertwo",   limit: 255
+    t.text     "answerthree"
     t.integer  "question_id"
     t.datetime "created_at"
     t.datetime "updated_at"
