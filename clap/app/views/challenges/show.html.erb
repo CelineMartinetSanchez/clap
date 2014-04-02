@@ -1,0 +1,56 @@
+<!-- Shortcuts -->
+	<% challenge = @challenge %>
+	<% steps = @challenge.challenge_steps %>
+	<% @challenge.challenge_steps.select('question_id') %>
+
+
+<!-- En-tête -->
+	<h2>RESULTATS</h2>
+
+	<p>
+	  <strong>Hey <%= current_user.first_name %>, tu as eu <%= @challenge.score %> bonnes réponses à ce challenge !</strong>
+	</p>
+
+	<br/>
+
+##################################################
+
+
+<!-- Détail des résultats -->
+
+<h2>Un petit feedback pour éclairer ta lanterne</h2>
+
+<p>
+	<%= steps.each do |cs| %>
+		<p> La question : <%= cs.question.query %> </p>
+		<p> Les réponses possibles : 
+			- <%= cs.question.answer.goodanswer %> 
+			- <%= cs.question.answer.answertwo %>
+			- <%= cs.question.answer.answerthree %>
+		</p>
+		<p> Ta réponse : <%= cs.chosen_answer%> </p>
+		<p> La bonne réponse : <%= cs.question.answer.goodanswer %> </p>
+		<p> Une explication sur cette question : <%= cs.question.explanation %> </p>
+		<p> La source de notre information : <%= cs.question.source_url %> </p>
+		<p> La difficulté de cette question : <%= cs.question.difficulty %> </p>
+
+		###########
+
+	<% end %>
+</p>
+
+
+
+
+##################################################
+
+<!-- Un autre quiz -->
+
+<p>
+	<% if @available_questions.count == 0 %>
+		<%= link_to "Vous avez fini tous les quiz disponibles cette semaine ! Retour à l'accueil", challenges_path, class: "btn btn-default btn-lg" %>
+	<% else %>
+		<%= link_to "Commencer un nouveau challenge", new_challenge_path, class: "btn btn-default btn-lg" %>
+		<%= link_to "Retour à l'accueil", challenges_path, class: "btn btn-default btn-lg" %>
+	<% end %>
+</p>

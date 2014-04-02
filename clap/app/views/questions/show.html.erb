@@ -1,14 +1,37 @@
 <p id="notice"><%= notice %></p>
 
 <p>
-  <strong>Name:</strong>
-  <%= @question.name %>
+  <strong>Question:</strong>
+  <%= @question.query %>
 </p>
 
 <p>
-  <strong>Help:</strong>
-  <%= @question.help %>
+  <strong>Explications:</strong>
+  <%= @question.explanation %>
 </p>
 
-<%= link_to 'Edit', edit_question_path(@question) %> |
-<%= link_to 'Back', questions_path %>
+<p>
+  <strong>URL source:</strong>
+  <%= @question.source_url %>
+</p>
+
+<p>
+  <strong>Difficulté:</strong>
+  <%= @question.difficulty %>
+</p>
+
+<p>
+	<strong>Réponses</strong>
+	<li>Bonne réponse : <%= @question.answer.goodanswer %></li>
+	<li>Mauvaise réponse : <%= @question.answer.answertwo %> </li>
+	<li>Mauvaise Réponse : <%= @question.answer.answerthree %> </li>
+</p>
+
+<p>
+	<strong>Catégorie</strong>
+	<%= @question.section.name %>
+</p>
+
+<%= link_to 'Ajouter une nouvelle question', new_question_path %> |
+<%= link_to 'Editer', edit_question_path(@question) %> |
+<%= link_to 'Retour', questions_path %>

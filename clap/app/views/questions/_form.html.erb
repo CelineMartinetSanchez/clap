@@ -10,41 +10,42 @@
       </ul>
     </div>
   <% end %>
-
+<fieldset>
   <div class="field">
-    <%= f.label :name %><br>
-    <%= f.text_area :name %>
-  </div>
-  <div class="field">
-    <%= f.label :help %><br>
-    <%= f.text_area :help %>
+    <%= f.label :query, "Question" %><br />
+    <%= f.text_area :query, placeholder: 'Entrez votre question' %><br />
   </div>
 
+  <div class="field">
+    <%= f.label :difficulty, "Difficulté de cette question (Facile: 1 / Difficile: 3)" %><br>
+    <%= f.number_field :difficulty, in: 1...4 %>
+  </div>
+
+  <div class="field">
+    <%= f.label :explanation, "Entrez une explication qui apparaîtra à la fin du Quiz" %><br>
+    <%= f.text_area :explanation %>
+  </div>
+
+  <div class="field">
+    <%= f.label :source_url, "Donnez un lien vers la source de votre information" %><br>
+    <%= f.text_field :source_url %>
+  </div>
+  
+  <%= f.check_box :_destroy %>
+  <%= f.label :_destroy, "Effacer la question" %>
+  
+  <%= f.fields_for :answer do |builder| %>
+    <%= render 'answer_set_fields', f: builder %>
+  <% end %>
+</fieldset>
 
   <h3>Section</h3>
   <div class="field">
     <%= f.fields_for :section, @section do |c| %>
-      <%= c.label :name %>
+      <%= c.label :name, "Titre de la catégorie" %>
       <%= c.text_area :name %>
-      <%= c.label :description %>
+      <%= c.label :description, "Description" %>
       <%= c.text_area :description %>
-    <% end %>
-  </div>
-
-
-  <h3>Answers</h3>
-  <div class="field">
-    <%= f.fields_for :answer, @answer do |a| %>
-      <%= a.label :truefalse, "true" %>
-      <%= a.radio_button :truefalse, "0"%>
-      <%= a.label :truefalse, "false" %>
-      <%= a.radio_button :truefalse, "1" %>
-      <%= a.label :single %>
-      <%= a.text_area :single %>
-      <%= a.label :number %>
-      <%= a.number_field :number %>
-      <%= a.label :multiplechoice %>
-      <%= a.text_area :multiplechoice, include_blank: 'separate with commas' %>
     <% end %>
   </div>
 

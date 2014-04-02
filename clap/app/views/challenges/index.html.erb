@@ -1,0 +1,15 @@
+<ul>
+  <% @challenges.each do |c|%>
+    <li>
+        <%= c.champion.first_name%> a tenté le <%= link_to "challenge #{c.id}", challenge_path(c) %> et a eu <%= c.score %> bonnes réponses 
+    </li>
+  <% end %>
+</ul>
+
+<p>
+  <% if @available_questions.count == 0 %>
+    Vous avez fini tous les quiz disponibles cette semaine ! 
+  <% else %>
+    <%= link_to 'Commencer un nouveau challenge', new_challenge_path, class: "btn btn-default btn-lg" %>
+  <% end %>
+</p>

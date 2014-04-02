@@ -1,17 +1,41 @@
 Rails.application.routes.draw do
+
+  resources :challenges do
+    resources :challenge_steps
+  end
+
   devise_for :admins
-  devise_for :users
-  # resources :sections
 
-  # resources :answers
+  devise_for :users, :controllers => { :omniauth_callbacks => "users/omniauth_callbacks" }
 
-  resources :questions
+  resources :questions do
+    resources :answers
+  end
+
+  devise_scope :admin do
+    authenticated :admin do
+      root :to => 'questions#index'
+    end
+
+  end
+
+  devise_scope :user do
+    authenticated :user do
+      root :to => 'challenges#index', as: :authenticated_root
+    end
+    unauthenticated :user do
+      root :to => 'quiz#index', as: :unauthenticated_root
+    end
+  end
+
+  get '/profile' => 'users#show'
+  get '/challenge/score(.:format)' => 'challenges#create', as: :score
 
   # The priority is based upon order of creation: first created -> highest priority.
   # See how all your routes lay out with "rake routes".
 
   # You can have the root of your site routed with "root"
-  root 'questions#index'
+  # root 'quiz#index'
 
   # Example of regular route:
   #   get 'products/:id' => 'catalog#view'
